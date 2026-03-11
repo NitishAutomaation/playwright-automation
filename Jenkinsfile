@@ -1,13 +1,9 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs "NodeJS18"
-    }
-
     stages {
 
-        stage('Clone Repository') {
+        stage('Checkout Code') {
             steps {
                 git 'https://github.com/NitishAutomaation/playwright-automation.git'
             }
@@ -15,19 +11,19 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Install Playwright Browsers') {
             steps {
-                sh 'npx playwright install'
+                bat 'npx playwright install'
             }
         }
 
-        stage('Run Automation Tests') {
+        stage('Run Tests') {
             steps {
-                sh 'npm test'
+                bat 'npm test'
             }
         }
 
